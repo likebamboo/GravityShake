@@ -187,9 +187,10 @@ public class PhotoViewWithTag extends PhotoView implements OnTagAngleChangedLite
         mTempMatrix.reset();
         // 获取旋转角度
         if (getAccelHelper() != null) {
-            mTempMatrix.preRotate(getAccelHelper().getCurrentAngleDegrees());
+            mTempMatrix.setRotate(getAccelHelper().getCurrentAngleDegrees(), pointX, pointY);
         }
-        mTempMatrix.mapRect(mTouchRects[index]);
+        // 此处其实是一个简单的矩形旋转，借助Matrix类
+        mTempMatrix.mapRect(mTouchRects[index], mTouchRects[index]);
     }
 
     @Override
